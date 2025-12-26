@@ -12,13 +12,13 @@
             --paper: #ffffff;
             --ink: #1a1a1a;
             --soft-gray: #f4f4f4;
-            --accent: #d4af37; /* Gold touch like premium apps */
+            --accent: #d4af37;
             --crimson: 'Crimson Pro', serif;
             --inter: 'Inter', sans-serif;
         }
 
-        /* Prevent Italics */
-        * { font-style: normal !important; box-sizing: border-box; outline: none; }
+        /* Sab kuch upright (No Italics) */
+        * { font-style: normal !important; box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -28,171 +28,167 @@
             scroll-behavior: smooth;
         }
 
-        /* --- Reading App Top Bar --- */
-        .top-nav {
-            position: fixed;
-            top: 0; width: 100%;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+        /* --- Full Screen Book Cover Header --- */
+        .hero-cover {
+            position: relative;
+            height: 100vh;
+            width: 100%;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 30px;
-            z-index: 1000;
-            border-bottom: 1px solid var(--soft-gray);
-        }
-
-        .logo { font-family: var(--inter); font-weight: 600; font-size: 14px; letter-spacing: 2px; }
-        .read-time { font-family: var(--inter); font-size: 11px; color: var(--accent); text-transform: uppercase; }
-
-        /* --- Hero Section (Poetry.com Style) --- */
-        .hero {
-            padding: 150px 20px 80px 20px;
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
+            color: white;
+            overflow: hidden;
+            background-color: #000;
         }
 
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 5.5rem);
-            font-weight: 700;
-            margin-bottom: 10px;
-            line-height: 1.1;
+        /* Background Image for Title */
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                              url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1600&auto=format'); /* Library/Book aesthetic */
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            transform: scale(1.1);
+            filter: blur(2px);
         }
 
-        .hero p {
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .hero-content p {
             font-family: var(--inter);
-            font-size: 16px;
-            letter-spacing: 3px;
-            color: #888;
+            font-size: 14px;
+            letter-spacing: 5px;
             text-transform: uppercase;
+            margin-bottom: 20px;
+            color: rgba(255,255,255,0.8);
         }
 
-        /* --- Main Content --- */
+        .hero-content h1 {
+            font-size: clamp(3.5rem, 12vw, 7rem);
+            font-weight: 700;
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-content .author {
+            font-family: var(--inter);
+            font-size: 18px;
+            margin-top: 30px;
+            letter-spacing: 3px;
+            font-weight: 300;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 20px;
+            display: inline-block;
+        }
+
+        /* --- Article Container --- */
         .article-container {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 0 20px;
+            max-width: 750px;
+            margin: 100px auto;
+            padding: 0 25px;
         }
 
-        /* --- Image Slideshow (Reading App Style) --- */
-        .app-slideshow {
+        /* --- Modern Slideshow (Birds, Flowers, Locations) --- */
+        .slideshow-block {
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            height: 80vh;
+            height: 85vh;
             position: relative;
             margin-bottom: 80px;
             overflow: hidden;
-            background: var(--soft-gray);
+            background: #000;
         }
 
-        .app-slideshow img {
+        .slideshow-block img {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 2s ease-in-out, transform 10s linear;
+            transition: opacity 2s ease-in-out;
         }
 
-        .app-slideshow img.active {
-            opacity: 1;
-            transform: scale(1.05); /* Slight zoom effect */
-        }
+        .slideshow-block img.active { opacity: 1; }
 
         /* --- Typography --- */
-        .section-label {
+        .label {
             font-family: var(--inter);
             font-size: 12px;
             color: var(--accent);
+            letter-spacing: 3px;
             font-weight: 600;
-            letter-spacing: 2px;
             display: block;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .chapter-title {
-            font-size: 40px;
+            font-size: 44px;
             font-weight: 600;
-            margin-bottom: 40px;
-            line-height: 1.2;
+            line-height: 1.1;
+            margin-bottom: 50px;
         }
 
-        .story-content {
+        .text-body {
             font-size: 1.45rem;
-            line-height: 2;
-            color: #2c2c2c;
-            margin-bottom: 120px;
+            line-height: 2.1;
+            color: #1a1a1a;
         }
 
-        .paragraph { margin-bottom: 40px; text-align: left; }
+        .paragraph { margin-bottom: 45px; }
 
         /* Drop Cap */
         .paragraph:first-of-type::first-letter {
             float: left;
-            font-size: 5rem;
-            line-height: 0.8;
-            padding-right: 15px;
-            padding-top: 10px;
+            font-size: 6rem;
+            line-height: 0.7;
+            padding-right: 20px;
+            padding-top: 12px;
             font-weight: 700;
-            color: var(--ink);
         }
 
-        /* --- Footer --- */
         footer {
-            padding: 100px 20px;
-            background: var(--soft-gray);
+            padding: 80px 20px;
+            background: #111;
+            color: #555;
             text-align: center;
             font-family: var(--inter);
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: #666;
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            font-size: 11px;
+            letter-spacing: 3px;
         }
 
         @media (max-width: 768px) {
-            .app-slideshow { height: 50vh; }
-            .chapter-title { font-size: 28px; }
-            .story-content { font-size: 1.25rem; }
+            .slideshow-block { height: 50vh; }
+            .hero-content h1 { font-size: 4rem; }
+            .text-body { font-size: 1.25rem; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="top-nav">
-        <div class="logo">H. JATOI</div>
-        <div class="read-time">10 Min Read</div>
-    </nav>
-
-    <header class="hero">
-        <p>Featured Story</p>
-        <h1>Shadow of Love</h1>
-        <div style="width: 50px; height: 2px; background: var(--accent); margin: 30px auto;"></div>
+    <header class="hero-cover">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p>A Modern Masterpiece</p>
+            <h1>Shadow of Love</h1>
+            <div class="author">HASSAN JATOI</div>
+        </div>
     </header>
-
-    <div class="app-slideshow" id="slideshow-1">
-        <img src="https://images.unsplash.com/photo-1444464666168-49d633b867ad?auto=format&fit=crop&w=1600&q=80" class="active" alt="Famous Kingfisher">
-        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1600&q=80" alt="Famous Flower Fields">
-    </div>
 
     <main class="article-container">
         
-        <section class="fade-in">
-            <span class="section-label">PART I</span>
+        <section>
+            <span class="label">CHAPTER ONE</span>
             <h2 class="chapter-title">The Place Where Silence Learns Your Name</h2>
-            <div class="story-content">
+            <div class="text-body">
                 <div class="paragraph">Evening did not arrive loudly. It slipped into the room like a secret that had waited too long to be told. The sky slowly lost its color, blue turning into something tired and unsure, as if it too was carrying a memory it could not release.</div>
                 <div class="paragraph">The city outside continued breathing, lights blinking without emotion, streets moving without meaning, people passing with lives that did not touch his. Inside the small room on the fourth floor, a man sat quietly, learning once again how to be alone.</div>
                 <div class="paragraph">Adrian leaned against the wall, its cold pressing gently into his back as if reminding him that some things still existed even when warmth did not. The room held the smell of old pages and forgotten hours. Books lay scattered like unfinished thoughts, their open mouths unable to speak anymore.</div>
@@ -203,15 +199,15 @@
             </div>
         </section>
 
-        <div class="app-slideshow" id="slideshow-2" style="width: 100vw; margin-left: calc(-50vw + 50%);">
-            <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=1600&q=80" class="active" alt="London Landmark">
-            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1600&q=80" alt="Famous Library">
+        <div class="slideshow-block" id="show-1">
+            <img src="https://images.unsplash.com/photo-1555169062-013468b47731?q=80&w=1600" class="active" alt="Exotic Macaw Bird">
+            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=1600" alt="Famous Flower Fields">
         </div>
 
-        <section class="fade-in">
-            <span class="section-label">PART II</span>
+        <section>
+            <span class="label">CHAPTER TWO</span>
             <h2 class="chapter-title">When Love Still Had a Voice</h2>
-            <div class="story-content">
+            <div class="text-body">
                 <div class="paragraph">Memory does not ask permission; it arrives when the heart grows quiet enough to hear it, and tonight it came gently, carrying the weight of a beginning. There was a time before silence learned his name, before evenings became heavy, and before love learned how to hide.</div>
                 <div class="paragraph">Back then, the world had felt softer, as if light itself moved more slowly, as if time wanted to be noticed. He remembered the first moment clearly—not because it was dramatic, but because it was ordinary. Ordinary moments often become sacred later.</div>
                 <div class="paragraph">It was an afternoon washed in pale sunlight, the kind that makes dust glow, the kind that forgives everything. She had been sitting across from him, not trying to impress, not trying to be seen—just existing in her quiet way. Her eyes carried a calm that made noise feel unnecessary; her smile arrived slowly, as if it wanted to be sure before appearing.</div>
@@ -227,39 +223,32 @@
                 <div class="paragraph">Outside memory, the rain continued. Inside the room, the past breathed softly, wrapping itself around him. Adrian sat still, letting the memory finish what it had come to say. The shadow of love did not hurt in this moment; it warmed, it reminded, it whispered that once—before the breaking, before the leaving, before silence learned how to stay—love had spoken, and it had spoken gently.</div>
             </div>
         </section>
+
+        <div class="slideshow-block" id="show-2">
+            <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383?q=80&w=1600" class="active" alt="Famous Book Aesthetic">
+            <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?q=80&w=1600" alt="London Big Ben">
+        </div>
+
     </main>
 
     <footer>
-        &copy; 2025 HASSAN JATOI &bull; ALL RIGHTS RESERVED
+        &copy; 2025 HASSAN JATOI &bull; WORLD LITERARY EDITION
     </footer>
 
     <script>
-        // Automatic Image Flipper (10s)
-        function initSlideshow(id) {
-            const slides = document.querySelectorAll(`#${id} img`);
-            let current = 0;
+        function startSlideshow(id) {
+            const images = document.querySelectorAll(`#${id} img`);
+            let i = 0;
             setInterval(() => {
-                slides[current].classList.remove('active');
-                current = (current + 1) % slides.length;
-                slides[current].classList.add('active');
-            }, 10000);
+                images[i].classList.remove('active');
+                i = (i + 1) % images.length;
+                images[i].classList.add('active');
+            }, 10000); // 10 seconds
         }
 
-        // Reveal animations on scroll
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
         window.onload = () => {
-            initSlideshow('slideshow-1');
-            initSlideshow('slideshow-2');
+            startSlideshow('show-1');
+            startSlideshow('show-2');
         };
     </script>
 </body>
