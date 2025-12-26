@@ -3,204 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow of Love By Hassan Jatoi</title>
+    <title>Shadow of Love | Hassan Jatoi</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
     <style>
-        /* General body styling */
+        :root {
+            --paper-bg: #f9f7f2;
+            --charcoal: #1a1a1a;
+            --crimson: 'Crimson Pro', serif;
+            --inter: 'Inter', sans-serif;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Georgia', serif;
-            background: linear-gradient(to bottom, #fff8f0, #f0f8ff);
-            color: #333;
+            background-color: var(--paper-bg);
+            color: var(--charcoal);
+            font-family: var(--crimson);
+            font-style: normal !important; 
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Book cover style */
+        /* Global Reset to prevent italics */
+        * { font-style: normal !important; }
+
         .book-cover {
-            width: 90%;
-            max-width: 600px;
+            width: 100%;
+            max-width: 800px;
             text-align: center;
-            margin: 20px 0;
+            padding: 100px 20px;
+        }
+
+        .micro-label {
+            font-family: var(--inter);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            color: #888;
+            margin-bottom: 20px;
+            display: block;
         }
 
         .book-cover h1 {
-            font-size: 48px;
-            color: #6b1e7f;
-            margin-bottom: 10px;
+            font-family: var(--crimson);
+            font-weight: 700;
+            font-size: clamp(3rem, 12vw, 6rem); 
+            line-height: 1.1;
+            margin: 0;
         }
 
         .book-cover h2 {
-            font-size: 24px;
-            color: #e06f7d;
-            font-weight: normal;
+            font-family: var(--inter);
+            font-weight: 400;
+            font-size: 16px;
+            margin-top: 15px;
+            letter-spacing: 0.1em;
         }
 
-        /* Each Part styling */
         .part {
             width: 90%;
-            max-width: 700px;
-            background-color: #fff;
-            margin: 20px 0;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            max-width: 750px;
+            margin-bottom: 120px;
         }
 
-        .part img {
+        /* Enhanced Image Swapper */
+        .image-container {
             width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            height: 480px;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 50px;
+            position: relative;
+            background-color: #e5e5e5; /* Loading placeholder color */
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 2s ease-in-out;
+            opacity: 0;
+        }
+
+        .image-container img.active {
+            opacity: 1;
+        }
+
+        .ui-label {
+            font-family: var(--inter);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            color: #aaa;
+            margin-bottom: 10px;
+            display: block;
         }
 
         .part-title {
-            font-size: 28px;
-            color: #b23a48;
-            margin-bottom: 20px;
-            text-decoration: underline;
+            font-family: var(--crimson);
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 45px;
+            line-height: 1.3;
+        }
+
+        .reading-content {
+            font-size: 1.4rem;
+            line-height: 1.85;
+            text-align: left;
         }
 
         .paragraph {
-            margin-bottom: 15px;
-            font-size: 18px;
-            line-height: 1.8;
+            margin-bottom: 1.8rem;
         }
 
-        /* Responsive adjustments */
+        /* Drop Cap Logic */
+        .paragraph:first-of-type::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-top: 8px;
+            padding-right: 15px;
+            font-weight: 700;
+        }
+
+        footer {
+            font-family: var(--inter);
+            padding: 60px;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: #bbb;
+        }
+
         @media (max-width: 600px) {
-            .book-cover h1 {
-                font-size: 36px;
-            }
-            .book-cover h2 {
-                font-size: 20px;
-            }
-            .part-title {
-                font-size: 22px;
-            }
-            .paragraph {
-                font-size: 16px;
-            }
+            .image-container { height: 320px; }
+            .reading-content { font-size: 1.15rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Book Cover -->
     <div class="book-cover">
+        <span class="micro-label">A Digital Edition By</span>
         <h1>Shadow of Love</h1>
-        <h2>By Hassan Jatoi</h2>
-        <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTMyMXwwfDF8c2VhcmNofDF8fGJvb2slMjBjZXJlfGVufDB8fHx8MTY5MzY1NzkyNw&ixlib=rb-4.0.3&q=80&w=400" alt="Book Cover Image">
+        <h2>HASSAN JATOI</h2>
     </div>
 
-    <!-- Part One -->
     <div class="part">
-        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=500" alt="Part One Image">
-        <div class="part-title">Part One — The Place Where Silence Learns Your Name</div>
+        <div class="image-container" id="slideshow-1">
+            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200" class="active">
+            <img src="https://images.unsplash.com/photo-1474932430478-367dbb6832c1?q=80&w=1200">
+        </div>
 
-        <div class="paragraph">Evening did not arrive loudly it slipped into the room like a secret that had waited too long to be told the sky slowly lost its color blue turning into something tired and unsure as if it too was carrying a memory it could not release</div>
+        <span class="ui-label">PART I</span>
+        <div class="part-title">The Place Where Silence Learns Your Name</div>
 
-        <div class="paragraph">The city outside continued breathing lights blinking without emotion streets moving without meaning people passing with lives that did not touch his and inside the small room on the fourth floor a man sat quietly learning once again how to be alone</div>
-
-        <div class="paragraph">Adrian leaned against the wall its cold pressing gently into his back as if reminding him that some things still existed even when warmth did not the room held the smell of old pages and forgotten hours books lay scattered like unfinished thoughts their open mouths unable to speak anymore</div>
-
-        <div class="paragraph">Silence lived there now not the peaceful kind but the heavy kind that listens the kind that remembers</div>
-
-        <div class="paragraph">Once this room had known another rhythm soft footsteps shared breathing two cups placed too close on a table as if afraid of distance laughter that did not try to impress a voice that said his name like it mattered</div>
-
-        <div class="paragraph">Now silence had taken that voice and learned how to imitate it</div>
-
-        <div class="paragraph">Adrian closed his eyes and in the darkness behind them memory began to move not loudly not clearly but faithfully</div>
-
-        <div class="paragraph">He remembered how love had not ended in fire not in shouting or broken doors not in dramatic last words it had ended the way light leaves a room slowly politely without asking permission</div>
-
-        <div class="paragraph">Love had simply grown quieter until one day he realized he was listening to echoes</div>
-
-        <div class="paragraph">Outside the rain kept falling inside the shadow of love stretched gently across the floor not to hurt him not to leave him but to remind him that once something real had chosen to stay</div>
+        <div class="reading-content">
+            <div class="paragraph">Evening did not arrive loudly it slipped into the room like a secret that had waited too long to be told the sky slowly lost its color blue turning into something tired and unsure as if it too was carrying a memory it could not release.</div>
+            <div class="paragraph">The city outside continued breathing lights blinking without emotion streets moving without meaning people passing with lives that did not touch his and inside the small room on the fourth floor a man sat quietly learning once again how to be alone.</div>
+        </div>
     </div>
 
-    <!-- Part Two -->
-<div class="part">
-    <img src="IMAGE_URL_FOR_PART_TWO" alt="Part Two Image">
-    <div class="part-title">Part Two — When Love Still Had a Voice</div>
-    
-    <div class="paragraph">Memory does not ask permission it arrives when the heart grows quiet enough to hear it and tonight it came gently carrying the weight of a beginning</div>
-    
-    <div class="paragraph">There was a time before silence learned his name before evenings became heavy before love learned how to hide</div>
-    
-    <div class="paragraph">Back then the world had felt softer as if light itself moved more slowly as if time wanted to be noticed</div>
-    
-    <div class="paragraph">He remembered the first moment clearly not because it was dramatic but because it was ordinary and ordinary moments often become sacred later</div>
-    
-    <div class="paragraph">It was an afternoon washed in pale sunlight the kind that makes dust glow the kind that forgives everything</div>
-    
-    <div class="paragraph">She had been sitting across from him not trying to impress not trying to be seen just existing in her quiet way</div>
-    
-    <div class="paragraph">Her eyes carried a calm that made noise feel unnecessary her smile arrived slowly as if it wanted to be sure before appearing</div>
-    
-    <div class="paragraph">They spoke about small things books weather things that mattered only because they were shared their words did not rush they rested between them finding comfort in being heard</div>
-    
-    <div class="paragraph">He remembered thinking how strange it was that someone could feel familiar so quickly as if his heart had recognized her before his mind had time to question it</div>
-    
-    <div class="paragraph">Love did not announce itself it never does it slipped in disguised as comfort as ease as a moment that did not need explanation</div>
-    
-    <div class="paragraph">Days followed days and those quiet conversations grew roots they met again and then again each time carrying a little more warmth</div>
-    
-    <div class="paragraph">There was laughter then soft and unforced the kind that surprised him the kind that rose from somewhere deep and honest</div>
-    
-    <div class="paragraph">He learned the sound of her steps the rhythm of her pauses the way she looked away when thinking the way her voice softened when she spoke about things that mattered</div>
-    
-    <div class="paragraph">She listened truly listened as if his words were places she wanted to walk through slowly</div>
-    
-    <div class="paragraph">In her presence he felt less fragmented less unfinished as if pieces of himself were finding their correct positions</div>
-    
-    <div class="paragraph">Even silence between them felt full not empty not awkward but alive</div>
-    
-    <div class="paragraph">They could sit without speaking and still understand could share a look that carried entire conversations could smile without knowing why</div>
-    
-    <div class="paragraph">Time behaved differently then hours passed unnoticed evenings stretched like gentle promises and the future felt less frightening simply because she existed in it</div>
-    
-    <div class="paragraph">He remembered the first time he realized he was afraid not of losing her but of how much her absence already frightened him</div>
-    
-    <div class="paragraph">Love had begun to grow quietly like a root pushing through unseen soil patient persistent inevitable</div>
-    
-    <div class="paragraph">He never said the words out loud at first they felt too large too powerful as if naming them might break the spell</div>
-    
-    <div class="paragraph">But his heart had already spoken in its own language in the way it waited in the way it leaned toward her in the way the world felt slightly wrong when she was not near</div>
-    
-    <div class="paragraph">There were moments when their hands brushed accidentally briefly yet the touch stayed long after it ended</div>
-    
-    <div class="paragraph">Electric not in fire but in recognition</div>
-    
-    <div class="paragraph">The kind of touch that says you are not alone here</div>
-    
-    <div class="paragraph">He remembered one evening in particular the air heavy with the promise of rain the sky holding its breath</div>
-    
-    <div class="paragraph">They stood close close enough for warmth to travel close enough for silence to deepen</div>
-    
-    <div class="paragraph">She looked at him then really looked as if searching for something behind his eyes</div>
-    
-    <div class="paragraph">He did not know what she found only that her gaze softened and something unspoken passed between them</div>
-    
-    <div class="paragraph">A truth neither of them was ready to name</div>
-    
-    <div class="paragraph">That was how love lived in the beginning not loudly not dramatically but faithfully growing in the quiet spaces learning their shapes memorizing their pauses</div>
-    
-    <div class="paragraph">Looking back now he understood how rare that gentleness had been how easily it could be mistaken for something small</div>
-    
-    <div class="paragraph">Yet it had been everything</div>
-    
-    <div class="paragraph">Outside memory the rain continued inside the room the past breathed softly wrapping itself around him</div>
-    
-    <div class="paragraph">Adrian sat still letting the memory finish what it had come to say</div>
-    
-    <div class="paragraph">The shadow of love did not hurt in this moment it warmed it reminded it whispered that once before the breaking before the leaving before silence learned how to stay love had spoken and it had spoken gently</div>
-</div>
+    <div class="part">
+        <div class="image-container" id="slideshow-2">
+            <img src="https://images.unsplash.com/photo-1490312278390-ab6414ef8bb9?q=80&w=1200" class="active">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200">
+        </div>
 
+        <span class="ui-label">PART II</span>
+        <div class="part-title">When Love Still Had a Voice</div>
+
+        <div class="reading-content">
+            <div class="paragraph">Memory does not ask permission it arrives when the heart grows quiet enough to hear it and tonight it came gently carrying the weight of a beginning.</div>
+            <div class="paragraph">There was a time before silence learned his name before evenings became heavy before love learned how to hide. Back then the world had felt softer as if light itself moved more slowly as if time wanted to be noticed.</div>
+        </div>
+    </div>
+
+    <footer>
+        PUBLISHED 2024 &bull; HASSAN JATOI
+    </footer>
+
+    <script>
+        function initSlideshow(id) {
+            const container = document.getElementById(id);
+            const images = container.querySelectorAll('img');
+            let index = 0;
+
+            setInterval(() => {
+                images[index].classList.remove('active');
+                index = (index + 1) % images.length;
+                images[index].classList.add('active');
+            }, 10000); // 10 seconds
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initSlideshow('slideshow-1');
+            initSlideshow('slideshow-2');
+        });
+    </script>
 </body>
 </html>
