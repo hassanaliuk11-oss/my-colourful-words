@@ -5,207 +5,242 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shadow of Love | Hassan Jatoi</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --paper-bg: #f9f7f2;
-            --charcoal: #1a1a1a;
+            --paper-bg: #fbfaf8;
+            --text-main: #121212;
+            --accent-muted: #757575;
             --crimson: 'Crimson Pro', serif;
             --inter: 'Inter', sans-serif;
+        }
+
+        /* Prevent all italics */
+        * {
+            font-style: normal !important;
+            box-sizing: border-box;
         }
 
         body {
             margin: 0;
             padding: 0;
             background-color: var(--paper-bg);
-            color: var(--charcoal);
+            color: var(--text-main);
             font-family: var(--crimson);
-            font-style: normal !important; 
             display: flex;
             flex-direction: column;
             align-items: center;
+            line-height: 1.6;
         }
 
-        /* Global Reset to prevent italics */
-        * { font-style: normal !important; }
-
-        .book-cover {
+        /* --- Header & Hero --- */
+        .hero {
             width: 100%;
-            max-width: 800px;
+            max-width: 1100px;
+            padding: 120px 24px;
             text-align: center;
-            padding: 100px 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 80px;
         }
 
         .micro-label {
             font-family: var(--inter);
-            font-size: 10px;
+            font-size: 11px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5em;
-            color: #888;
-            margin-bottom: 20px;
+            letter-spacing: 0.6em;
+            color: var(--accent-muted);
+            margin-bottom: 24px;
             display: block;
         }
 
-        .book-cover h1 {
-            font-family: var(--crimson);
+        .hero h1 {
+            font-size: clamp(3.5rem, 12vw, 7.5rem);
             font-weight: 700;
-            font-size: clamp(3rem, 12vw, 6rem); 
-            line-height: 1.1;
+            line-height: 0.9;
             margin: 0;
+            letter-spacing: -0.03em;
         }
 
-        .book-cover h2 {
+        .hero h2 {
             font-family: var(--inter);
-            font-weight: 400;
-            font-size: 16px;
-            margin-top: 15px;
+            font-weight: 300;
+            font-size: 20px;
+            margin-top: 20px;
+            color: var(--text-main);
             letter-spacing: 0.1em;
         }
 
-        .part {
+        /* --- Main Content Layout --- */
+        .container {
             width: 90%;
-            max-width: 750px;
-            margin-bottom: 120px;
+            max-width: 800px;
         }
 
-        /* Enhanced Image Swapper */
-        .image-container {
+        .part-section {
+            margin-bottom: 150px;
+        }
+
+        /* --- Modern Image Flipper --- */
+        .flipper-wrapper {
             width: 100%;
-            height: 480px;
+            height: 550px;
+            position: relative;
+            margin-bottom: 60px;
             border-radius: 2px;
             overflow: hidden;
-            margin-bottom: 50px;
-            position: relative;
-            background-color: #e5e5e5; /* Loading placeholder color */
+            background-color: #eee;
         }
 
-        .image-container img {
+        .flipper-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             position: absolute;
             top: 0;
             left: 0;
-            transition: opacity 2s ease-in-out;
+            transition: opacity 2.5s ease-in-out;
             opacity: 0;
         }
 
-        .image-container img.active {
+        .flipper-wrapper img.active {
             opacity: 1;
         }
 
-        .ui-label {
+        /* --- Typography Styles --- */
+        .part-meta {
             font-family: var(--inter);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
+            color: var(--accent-muted);
             letter-spacing: 0.3em;
-            color: #aaa;
-            margin-bottom: 10px;
             display: block;
+            margin-bottom: 10px;
         }
 
         .part-title {
-            font-family: var(--crimson);
-            font-size: 36px;
+            font-size: 42px;
             font-weight: 600;
-            margin-bottom: 45px;
-            line-height: 1.3;
+            line-height: 1.2;
+            margin-bottom: 48px;
+            border-left: 4px solid var(--text-main);
+            padding-left: 24px;
         }
 
-        .reading-content {
-            font-size: 1.4rem;
+        .story-body {
+            font-size: 1.4rem; /* ~22.4px */
             line-height: 1.85;
-            text-align: left;
+            color: var(--text-main);
         }
 
         .paragraph {
-            margin-bottom: 1.8rem;
+            margin-bottom: 32px;
+            text-align: justify;
         }
 
-        /* Drop Cap Logic */
+        /* Modern Drop Cap */
         .paragraph:first-of-type::first-letter {
             float: left;
-            font-size: 5rem;
-            line-height: 0.8;
-            padding-top: 8px;
+            font-size: 5.5rem;
+            line-height: 0.7;
+            padding-top: 10px;
             padding-right: 15px;
             font-weight: 700;
+            color: var(--text-main);
         }
 
         footer {
+            width: 100%;
+            padding: 80px 20px;
+            text-align: center;
             font-family: var(--inter);
-            padding: 60px;
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            color: #bbb;
+            font-size: 11px;
+            letter-spacing: 0.4em;
+            color: var(--accent-muted);
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
-        @media (max-width: 600px) {
-            .image-container { height: 320px; }
-            .reading-content { font-size: 1.15rem; }
+        @media (max-width: 768px) {
+            .flipper-wrapper { height: 350px; }
+            .part-title { font-size: 30px; }
+            .story-body { font-size: 1.2rem; }
+            .hero { padding: 80px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="book-cover">
-        <span class="micro-label">A Digital Edition By</span>
+    <header class="hero">
+        <span class="micro-label">Digital Collection</span>
         <h1>Shadow of Love</h1>
-        <h2>HASSAN JATOI</h2>
-    </div>
+        <h2>BY HASSAN JATOI</h2>
+    </header>
 
-    <div class="part">
-        <div class="image-container" id="slideshow-1">
-            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200" class="active">
-            <img src="https://images.unsplash.com/photo-1474932430478-367dbb6832c1?q=80&w=1200">
-        </div>
+    <div class="container">
+        
+        <section class="part-section">
+            <div class="flipper-wrapper" id="flip-1">
+                <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1400" class="active" alt="Aesthetic Book">
+                <img src="https://images.unsplash.com/photo-1491841573634-28140fc7ced7?q=80&w=1400" alt="Distant Horizon">
+            </div>
 
-        <span class="ui-label">PART I</span>
-        <div class="part-title">The Place Where Silence Learns Your Name</div>
+            <span class="part-meta">CHAPTER ONE</span>
+            <h3 class="part-title">The Place Where Silence Learns Your Name</h3>
 
-        <div class="reading-content">
-            <div class="paragraph">Evening did not arrive loudly it slipped into the room like a secret that had waited too long to be told the sky slowly lost its color blue turning into something tired and unsure as if it too was carrying a memory it could not release.</div>
-            <div class="paragraph">The city outside continued breathing lights blinking without emotion streets moving without meaning people passing with lives that did not touch his and inside the small room on the fourth floor a man sat quietly learning once again how to be alone.</div>
-        </div>
-    </div>
+            <div class="story-body">
+                <div class="paragraph">Evening did not arrive loudly. It slipped into the room like a secret that had waited too long to be told. The sky slowly lost its color, blue turning into something tired and unsure, as if it too was carrying a memory it could not release.</div>
+                
+                <div class="paragraph">The city outside continued breathing, lights blinking without emotion, streets moving without meaning, people passing with lives that did not touch his. Inside the small room on the fourth floor, a man sat quietly, learning once again how to be alone.</div>
 
-    <div class="part">
-        <div class="image-container" id="slideshow-2">
-            <img src="https://images.unsplash.com/photo-1490312278390-ab6414ef8bb9?q=80&w=1200" class="active">
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200">
-        </div>
+                <div class="paragraph">Adrian leaned against the wall, its cold pressing gently into his back as if reminding him that some things still existed even when warmth did not. The room held the smell of old pages and forgotten hours. Books lay scattered like unfinished thoughts, their open mouths unable to speak anymore.</div>
+            </div>
+        </section>
 
-        <span class="ui-label">PART II</span>
-        <div class="part-title">When Love Still Had a Voice</div>
+        <section class="part-section">
+            <div class="flipper-wrapper" id="flip-2">
+                <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=1400" class="active" alt="Abstract Memory">
+                <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?q=80&w=1400" alt="Soft Light">
+            </div>
 
-        <div class="reading-content">
-            <div class="paragraph">Memory does not ask permission it arrives when the heart grows quiet enough to hear it and tonight it came gently carrying the weight of a beginning.</div>
-            <div class="paragraph">There was a time before silence learned his name before evenings became heavy before love learned how to hide. Back then the world had felt softer as if light itself moved more slowly as if time wanted to be noticed.</div>
-        </div>
+            <span class="part-meta">CHAPTER TWO</span>
+            <h3 class="part-title">When Love Still Had a Voice</h3>
+
+            <div class="story-body">
+                <div class="paragraph">Memory does not ask permission; it arrives when the heart grows quiet enough to hear it. Tonight it came gently, carrying the weight of a beginning. There was a time before silence learned his name, before evenings became heavy, and before love learned how to hide.</div>
+                
+                <div class="paragraph">Back then, the world had felt softer, as if light itself moved more slowly, as if time wanted to be noticed. He remembered the first moment clearly—not because it was dramatic, but because it was ordinary. Ordinary moments often become sacred later.</div>
+
+                <div class="paragraph">It was an afternoon washed in pale sunlight, the kind that makes dust glow, the kind that forgives everything. She had been sitting across from him, not trying to impress, not trying to be seen—just existing in her quiet way.</div>
+            </div>
+        </section>
+
     </div>
 
     <footer>
-        PUBLISHED 2024 &bull; HASSAN JATOI
+        &copy; 2025 HASSAN JATOI &bull; ALL RIGHTS RESERVED
     </footer>
 
     <script>
-        function initSlideshow(id) {
-            const container = document.getElementById(id);
-            const images = container.querySelectorAll('img');
-            let index = 0;
+        /**
+         * Logic to cycle images every 10 seconds
+         */
+        function runSlideshow(elementId) {
+            const container = document.getElementById(elementId);
+            const slides = container.querySelectorAll('img');
+            let current = 0;
 
             setInterval(() => {
-                images[index].classList.remove('active');
-                index = (index + 1) % images.length;
-                images[index].classList.add('active');
-            }, 10000); // 10 seconds
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 10000); // 10 second interval
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            initSlideshow('slideshow-1');
-            initSlideshow('slideshow-2');
-        });
+        window.onload = () => {
+            runSlideshow('flip-1');
+            runSlideshow('flip-2');
+        };
     </script>
 </body>
 </html>
