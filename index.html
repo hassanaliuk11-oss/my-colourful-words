@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow of Love | Hassan Jatoi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-paper: #f9f7f2; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-paper); color: #1a1a1a; -webkit-tap-highlight-color: transparent; }
+        .serif { font-family: 'Crimson Pro', serif; }
+        .novel-cover { perspective: 1000px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @media (min-width: 1024px) { .novel-cover:hover { transform: translateY(-12px) rotateY(-5deg); } }
+        .book-spine { width: 20px; background: linear-gradient(to right, rgba(0,0,0,0.2), transparent); position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px 0 0 4px; }
+        .reading-modal { display: none; position: fixed; inset: 0; background: #fff; z-index: 100; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .page-animation { animation: pageFlip 0.6s ease-out; }
+        @keyframes pageFlip { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .first-letter-cap::first-letter { font-family: 'Crimson Pro', serif; font-size: 4rem; font-weight: 700; float: left; margin-right: 0.5rem; line-height: 1; color: #1a1a1a; }
+        .story-content p { margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.15rem; }
+        @media (min-width: 768px) { .story-content p { font-size: 1.35rem; } }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="p-6 md:p-8 flex justify-between items-center max-w-7xl mx-auto border-b border-slate-200/50">
+        <div class="serif text-2xl md:text-3xl font-bold tracking-tighter uppercase">H. JATOI</div>
+        <div class="hidden md:flex space-x-10 text-xs uppercase tracking-[0.3em] font-semibold text-slate-400">
+            <a href="#" class="hover:text-black transition-colors">Library</a>
+            <a href="#" class="hover:text-black transition-colors">Philosophy</a>
+            <a href="#" class="hover:text-black transition-colors">Contact</a>
+        </div>
+        <div class="md:hidden text-[10px] uppercase tracking-widest font-bold text-blue-600">Menu</div>
+    </nav>
+
+    <!-- Novel Header -->
+    <header class="py-16 md:py-24 px-6 text-center max-w-5xl mx-auto">
+        <span class="text-[10px] uppercase tracking-[0.5em] text-blue-600 font-bold mb-4 block">Personal Anthology</span>
+        <h1 class="serif text-5xl md:text-9xl mb-6 md:mb-8 leading-tight tracking-tight">Shadow of Love</h1>
+        <p class="text-lg md:text-2xl text-slate-500 italic max-w-3xl mx-auto leading-relaxed serif px-4">
+            "A shadow was not darkness; it was proof of light, proof that something once stood close enough to shape you."
+        </p>
+        <div class="mt-12 md:mt-16 flex items-center justify-center gap-4 md:gap-6">
+            <span class="h-px w-12 md:w-20 bg-slate-300"></span>
+            <span class="text-[10px] md:text-sm uppercase tracking-[0.4em] text-slate-400 font-medium italic">Chapter One</span>
+            <span class="h-px w-12 md:w-20 bg-slate-300"></span>
+        </div>
+    </header>
+
+    <!-- Library Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-12 pb-32">
+        <div id="library-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
+            <!-- Story blocks will be injected here -->
+        </div>
+    </main>
+
+    <!-- Reading Overlay -->
+    <div id="reader" class="reading-modal">
+        <div class="max-w-3xl mx-auto py-16 md:py-24 px-6 md:px-8 relative">
+            <button onclick="closeReader()" class="fixed top-6 right-6 md:top-8 md:right-8 text-slate-400 hover:text-black z-50 p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            
+            <div id="reader-content" class="page-animation">
+                <div class="text-center mb-12 md:mb-16">
+                    <span id="reader-chapter-tag" class="text-[10px] uppercase tracking-[0.5em] text-blue-600 font-bold">Chapter One</span>
+                    <h2 id="reader-title" class="serif text-4xl md:text-5xl mt-4 mb-4 font-bold px-4"></h2>
+                    <p id="reader-subtitle" class="serif italic text-lg md:text-xl text-slate-500">Shadow of Love</p>
+                    <div class="h-px w-20 bg-slate-200 mx-auto mt-8 md:mt-10"></div>
+                </div>
+                <div id="reader-text" class="serif leading-relaxed text-slate-800 space-y-6 first-letter-cap story-content">
+                    <!-- Dynamic story text will appear here -->
+                </div>
+            </div>
+            
+            <div class="mt-24 text-center border-t border-slate-100 pt-12">
+                <p class="text-[9px] uppercase tracking-[0.4em] text-slate-300 font-bold">Hassan Jatoi &bull; My Colourful World</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 py-16 px-6 text-center">
+        <h2 class="serif text-3xl md:text-4xl mb-6 italic">The journey continues...</h2>
+        <p class="text-slate-400 text-[10px] tracking-[0.3em] uppercase mb-8">Author: Hassan Jatoi</p>
+        <div class="flex justify-center gap-2">
+            <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+            <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+            <div class="w-2 h-2 rounded-full bg-red-900"></div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Chapter One story content (Parts One & Three)
+        const stories = {
+            "Amber": `### Part One — The Place Where Silence Learns Your Name
+
+Evening did not arrive loudly. It slipped into the room like a secret that had waited too long to be told. The sky slowly lost its color—blue turning into something tired and unsure, as if it too was carrying a memory it could not release.
+
+The city outside continued breathing—lights blinking without emotion, streets moving without meaning, people passing with lives that did not touch his. Inside the small room on the fourth floor, a man sat quietly learning once again how to be alone.
+
+Adrian leaned against the wall, its cold pressing gently into his back, as if reminding him that some things still existed even when warmth did not. The room held the smell of old pages and forgotten hours. Books lay scattered like unfinished thoughts, their open mouths unable to speak anymore.
+
+Silence lived there now—not the peaceful kind, but the heavy kind that listens, the kind that remembers. Once this room had known another rhythm: soft footsteps, shared breathing, two cups placed too close on a table as if afraid of distance, laughter that did not try to impress, a voice that said his name like it mattered. Now silence had taken that voice and learned how to imitate it.
+
+### Part Three — The Depths That Love Reached
+
+Days became a rhythm
+a quiet rhythm
+not marked by clocks or plans
+but by small gestures that said more than words could carry
+
+He learned the weight of her presence
+not as a burden
+but as a promise
+the kind of promise that does not need paper or signature
+only understanding
+only noticing
+only existing
+
+Sometimes they would walk without purpose
+through streets lined with light and shadow
+the city moving around them
+blurring into background noise
+but their steps remained in sync
+unspoken yet precise
+
+She laughed at nothing and everything
+her laugh spilling into his world
+painting over cracks he had not known existed
+he had tried to live alone
+to shut the door on hope
+but she entered
+quietly
+gently
+impossible to ignore
+
+He remembered the nights
+windows open
+wind carrying rain and distant voices
+they sat in silence
+sometimes speaking
+sometimes not
+always feeling each other without saying the word love
+
+The word was too small
+too ordinary
+for what existed between them
+it was bigger than speech
+more dangerous than confession
+more beautiful than certainty
+
+And yet
+they found ways to say it
+in glances
+in pauses
+in the warmth of a hand hovering near his
+in the brush of shoulders against each other in passing
+
+The world seemed simpler then
+less sharp
+less demanding
+the future a soft blur
+not frightening
+not pressing
+simply something to walk toward together
+
+But the depth of love always carries its own shadow
+a shadow that grows quietly
+that whispers that loss is inevitable
+that pain waits
+that nothing lasts forever
+
+He noticed it first in the way she sometimes looked away
+eyes clouded with thought
+a distance in a moment that otherwise felt complete
+he wanted to ask
+to reach
+to hold
+but she smiled and returned to him
+and the shadow lingered
+a thin pulse beneath warmth
+
+It was then he realized
+love does not live only in presence
+it grows in attention
+in noticing
+in patience
+in accepting the impermanence of moments
+
+They did not need promises
+the quiet recognition was enough
+to understand
+to trust
+to hope
+
+One evening
+rain heavy against the glass
+light refracted through droplets
+they sat close
+shoulders touching
+breathing the same air
+and time seemed to fold in on itself
+
+He whispered a word
+softly
+almost afraid it might vanish
+and she leaned in slightly
+not to answer
+not to speak
+but to acknowledge
+to affirm
+to exist
+
+This was the depth of love
+not passion
+not drama
+not declaration
+but recognition
+an understanding that even if everything ended tomorrow
+this had been real
+and real enough to change him
+to teach him
+to leave a mark
+
+He thought of the shadows
+how they had followed him
+how they had waited
+how they had whispered truths he could not yet name
+and now they felt less frightening
+less heavy
+because he knew
+some shadows protect as much as they warn
+some shadows are the evidence of light that once existed
+
+They stayed together in that room
+and the night grew around them
+soft and enveloping
+their breaths mingling
+their hearts echoing in quiet sync
+
+And somewhere in the silence
+he realized
+the shadow of love was not only loss
+it was the proof of having loved
+of having opened
+of having risked everything for a fleeting eternity
+
+The rain kept falling
+but it no longer felt lonely
+it felt like a hymn
+a witness
+a gentle reminder
+that what is beautiful always leaves traces
+
+He closed his eyes
+resting against the warmth beside him
+letting the shadow stretch gently across the room
+knowing that even if tomorrow came
+and even if the world changed
+and even if silence returned fully
+the depth of love would remain
+in memory
+in skin
+in breath
+in heart
+
+And he smiled slightly
+not because the past could return
+but because it had been enough
+more than enough
+to teach him how to feel
+how to notice
+how to exist fully`
+        };
+
+        const colorMap = { "Amber": "#FFBF00" };
+        const grid = document.getElementById('library-grid');
+
+        Object.keys(colorMap).forEach(name => {
+            const card = document.createElement('div');
+            card.className = 'novel-cover relative group cursor-pointer';
+            const bgColor = colorMap[name];
+            const content = stories[name];
+
+            card.innerHTML = `
+                <div class="h-[380px] md:h-[450px] w-full rounded-r-xl shadow-lg relative overflow-hidden flex flex-col justify-end p-8 md:p-10 text-white transition-all duration-500" 
+                     style="background-color: ${bgColor};">
+                    <div class="book-spine"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40"></div>
+                    <div class="relative z-10">
+                        <span class="text-[8px] md:text-[9px] tracking-[0.4em] uppercase opacity-70 font-bold">Chapter One</span>
+                        <h3 class="serif text-3xl md:text-4xl font-bold leading-tight mt-2">${name}</h3>
+                        <div class="h-0 w-0 group-hover:w-12 bg-white mt-4 transition-all duration-500"></div>
+                    </div>
+                </div>
+            `;
+
+            card.onclick = () => openReader(name, content);
+            grid.appendChild(card);
+        });
+
+        function openReader(title, text) {
+            const container = document.getElementById('reader-text');
+            document.getElementById('reader-title').innerText = title === 'Amber' ? 'The First Fracture' : title;
+
+            const formattedHtml = text.split('\n\n').map(p => {
+                if (p.startsWith('###')) {
+                    return `<h4 class="text-2xl md:text-3xl font-bold mt-12 mb-6 border-b border-slate-100 pb-2 text-slate-900 serif italic">${p.replace(/###/g, '').trim()}</h4>`;
+                }
+                return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+            }).join('');
+
+            container.innerHTML = formattedHtml;
+            document.getElementById('reader').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            window.scrollTo(0, 0);
+        }
+
+        function closeReader() {
+            document.getElementById('reader').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
