@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Once Upon A Heart | Cinematic Experience</title>
-    <!-- Premium Fonts: Cormorant Garamond for Poetry, Cinzel for Titles -->
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -25,11 +25,63 @@
             background-color: var(--bg);
             color: var(--accent);
             font-family: var(--font-serif);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            overflow: hidden; /* Prevent scroll during intro */
         }
 
-        /* Fixed Navigation */
+        /* --- INTRO SEQUENCE STYLES --- */
+        #intro-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.5s ease;
+        }
+
+        #intro-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        #intro-text {
+            position: relative;
+            z-index: 10000;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.5s ease;
+        }
+
+        #intro-text h1 {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 10vw, 80px);
+            color: var(--accent);
+            letter-spacing: 10px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(197, 160, 89, 0.5);
+        }
+
+        #intro-text p {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* --- MAIN WEBSITE STYLES --- */
+        #main-content {
+            opacity: 0;
+            transition: opacity 2s ease;
+            visibility: hidden;
+        }
+
         .nav {
             position: fixed;
             top: 0; width: 100%;
@@ -70,7 +122,6 @@
             border-color: var(--gold);
         }
 
-        /* Cinematic Sections */
         .hero {
             height: 100vh;
             display: flex;
@@ -100,10 +151,7 @@
             color: var(--gold);
         }
 
-        /* The Scroll Stream */
-        .scroll-stream {
-            padding: 0 10%;
-        }
+        .scroll-stream { padding: 0 10%; }
 
         .poetry-block {
             min-height: 40vh;
@@ -131,13 +179,10 @@
             max-width: 1000px;
             margin-bottom: 25px;
             cursor: pointer;
-            letter-spacing: 0.5px;
             color: #efefef;
         }
 
-        .poetry-text:hover {
-            color: var(--gold);
-        }
+        .poetry-text:hover { color: var(--gold); }
 
         .author-sign {
             font-family: var(--font-display);
@@ -145,10 +190,8 @@
             letter-spacing: 6px;
             text-transform: uppercase;
             color: var(--dim);
-            margin-top: 10px;
         }
 
-        /* Large Image Intermissions */
         .visual-intermission {
             width: 100vw;
             height: 100vh;
@@ -158,27 +201,15 @@
             background-attachment: fixed;
             position: relative;
             margin-bottom: 120px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .visual-intermission::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, 
-                rgba(0,0,0,1) 0%, 
-                rgba(0,0,0,0.3) 20%, 
-                rgba(0,0,0,0.3) 80%, 
-                rgba(0,0,0,1) 100%);
+            background: linear-gradient(to bottom, #000 0%, transparent 20%, transparent 80%, #000 100%);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--gold); }
-
-        /* Toast Notification */
         #toast {
             position: fixed;
             top: 50%; left: 50%;
@@ -189,46 +220,54 @@
             font-family: var(--font-display);
             font-size: 12px;
             font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
             display: none;
-            z-index: 1000;
-            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
+            z-index: 100000;
         }
 
         @media (max-width: 768px) {
             .nav { padding: 20px; }
             .hero h1 { font-size: 60px; }
-            .poetry-text { font-size: 26px; padding: 0 15px; }
+            .poetry-text { font-size: 26px; }
             .visual-intermission { height: 65vh; margin-left: -15%; }
         }
     </style>
 </head>
 <body>
 
-<nav class="nav">
-    <div class="logo">Hassan Jatoi</div>
-    <div class="actions">
-        <button class="btn" onclick="shareDoc()">Share</button>
-        <button class="btn" onclick="downloadPDF()">Export</button>
+<!-- Intro Loader -->
+<div id="intro-overlay">
+    <img id="intro-image" src="https://i.ibb.co/7FrHjhf/3-OCE-UPON.jpg" alt="Intro Cover">
+    <div id="intro-text">
+        <h1>ONCE UPON A HEART</h1>
+        <p>HASSAN JATOI</p>
     </div>
-</nav>
+</div>
 
-<div id="main-wrap">
-    <section class="hero">
-        <p>A Visual Poetry Collection</p>
-        <h1>ONCE<br>UPON A<br>HEART</h1>
-        <p>Hassan Jatoi &bull; MMXXV</p>
-    </section>
+<div id="main-content">
+    <nav class="nav">
+        <div class="logo">Hassan Jatoi</div>
+        <div class="actions">
+            <button class="btn" onclick="shareDoc()">Share</button>
+            <button class="btn" onclick="downloadPDF()">Export</button>
+        </div>
+    </nav>
 
-    <div class="scroll-stream" id="stream">
-        <!-- Lines and User Images injected here -->
+    <div id="main-wrap">
+        <section class="hero">
+            <p>A Visual Poetry Collection</p>
+            <h1>ONCE<br>UPON A<br>HEART</h1>
+            <p>Hassan Jatoi &bull; MMXXV</p>
+        </section>
+
+        <div class="scroll-stream" id="stream">
+            <!-- Content Injected via JS -->
+        </div>
+
+        <section class="hero" style="height: 60vh;">
+            <h1 style="font-size: 40px; letter-spacing: 4px;">Fin.</h1>
+            <p>Where the words end, the silence begins.</p>
+        </section>
     </div>
-
-    <section class="hero" style="height: 60vh;">
-        <h1 style="font-size: 40px; letter-spacing: 4px;">Fin.</h1>
-        <p>Where the words end, the silence begins.</p>
-    </section>
 </div>
 
 <div id="toast">Copied to Clipboard</div>
@@ -238,13 +277,13 @@
         "Once upon a broken heart that learned how to smile in silence",
         "Once upon a broken heart that carried its pain like a quiet prayer",
         "Once upon a broken heart that still believed in gentle endings",
-        "https://i.ibb.co/7FrHjhf/3-OCE-UPON.jpg", // First User Image
+        "https://i.ibb.co/7FrHjhf/3-OCE-UPON.jpg",
         "Once upon a broken heart that loved even after being emptied",
         "Once upon a broken heart that stitched itself with memories",
         "Once upon a broken heart that spoke fluently in sighs",
         "Once upon a broken heart that hid its cracks behind kindness",
         "Once upon a broken heart that bled poetry instead of tears",
-        "https://i.ibb.co/cSK9DTDC/OCE-UPON-12.jpg", // Second User Image
+        "https://i.ibb.co/cSK9DTDC/OCE-UPON-12.jpg",
         "Once upon a broken heart that chose softness over bitterness",
         "Once upon a broken heart that learned how to breathe again",
         "Once upon a broken heart that trusted the dark to teach it light",
@@ -252,7 +291,7 @@
         "Once upon a broken heart that aged faster than time",
         "Once upon a broken heart that survived its own silence",
         "Once upon a broken heart that made peace with loneliness",
-        "https://i.ibb.co/KjhHwmfb/OCE-UPON.jpg", // Third User Image
+        "https://i.ibb.co/KjhHwmfb/OCE-UPON.jpg",
         "Once upon a broken heart that turned wounds into wisdom",
         "Once upon a broken heart that spoke only to the moon",
         "Once upon a broken heart that carried love like a ghost",
@@ -326,6 +365,37 @@
         "Once upon a broken heart that became poetry"
     ];
 
+    function startCinematicSequence() {
+        const overlay = document.getElementById('intro-overlay');
+        const img = document.getElementById('intro-image');
+        const text = document.getElementById('intro-text');
+        const main = document.getElementById('main-content');
+
+        // Step 1: Show Image for 2 Seconds
+        setTimeout(() => {
+            img.style.opacity = '0.6';
+        }, 100);
+
+        // Step 2: Show Title for 5 Seconds
+        setTimeout(() => {
+            img.style.opacity = '0.2';
+            text.style.opacity = '1';
+            text.style.transform = 'translateY(0)';
+        }, 2000);
+
+        // Step 3: Reveal Main Website
+        setTimeout(() => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                main.style.visibility = 'visible';
+                main.style.opacity = '1';
+                document.body.style.overflow = 'auto'; // Re-enable scroll
+                initStream();
+            }, 1500);
+        }, 7000); // 2s image + 5s title = 7s total
+    }
+
     function initStream() {
         const stream = document.getElementById('stream');
         lines.forEach((item) => {
@@ -347,9 +417,7 @@
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
 
@@ -358,12 +426,9 @@
 
     function copyLine(text) {
         const el = document.createElement('textarea');
-        el.value = text;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
+        el.value = text; document.body.appendChild(el);
+        el.select(); document.execCommand('copy');
         document.body.removeChild(el);
-        
         const toast = document.getElementById('toast');
         toast.style.display = 'block';
         setTimeout(() => toast.style.display = 'none', 1500);
@@ -371,22 +436,21 @@
 
     function shareDoc() {
         const link = "https://hassanaliuk11-oss.github.io/Hassanalipoetry-/";
-        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("Dive into the visual manuscript: " + link)}`, '_blank');
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("Explore the manuscript: " + link)}`, '_blank');
     }
 
     function downloadPDF() {
         const element = document.getElementById('main-wrap');
         const opt = {
-            margin: 0,
-            filename: 'Hassan_Jatoi_Cinematic_Poetry.pdf',
+            margin: 0, filename: 'Hassan_Jatoi_Poetry.pdf',
             image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 1.5, backgroundColor: '#000000' },
+            html2canvas: { scale: 1.5, backgroundColor: '#000' },
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
         };
         html2pdf().set(opt).from(element).save();
     }
 
-    window.onload = initStream;
+    window.onload = startCinematicSequence;
 </script>
 
 </body>
