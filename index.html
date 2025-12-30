@@ -2,283 +2,519 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow of Love | Chapter 1.4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Once Upon A Love - Hassan Jatoi</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@300;400;600;700;800&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Premium Serif for Prose -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --bg: #0f0f0f;
-            --text: #e2e2e2;
-            --accent: #e0c097;
-            --dim: rgba(226, 226, 226, 0.6);
-            --border: rgba(226, 226, 226, 0.1);
+            --bg-color: #050505;
+            --accent-glow: radial-gradient(circle at 50% 50%, #151515 0%, #050505 100%);
+            --card-bg: rgba(255, 255, 255, 0.015);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #9a9a9a;
+            --gold: #c5a059;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-header: 'Cinzel', serif;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Lora', serif;
-            line-height: 1.8;
-            overflow-x: hidden;
+        body { 
+            background-color: var(--bg-color);
+            background-image: var(--accent-glow);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            text-align: center;
         }
 
-        /* Subtle Grain Background */
-        body::before {
-            content: "";
+        /* Modern Navigation */
+        .header-nav {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
-            opacity: 0.3;
-            pointer-events: none;
-            z-index: 0;
+            top: 0; width: 100%;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--card-border);
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 100px 25px;
+        .brand {
+            font-family: var(--font-header);
+            font-size: 14px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .nav-actions { display: flex; gap: 15px; }
+
+        .btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 12px 28px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10%;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(60px, 18vw, 140px);
+            line-height: 0.8;
+            margin-bottom: 30px;
+            font-weight: 900;
+            letter-spacing: -5px;
+            background: linear-gradient(180deg, #ffffff 0%, #444444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-family: var(--font-header);
+            font-size: 11px;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* Artistic Visual Blocks */
+        .art-container {
+            width: 100%;
+            padding: 60px 8%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .art-frame {
             position: relative;
-            z-index: 1;
-        }
-
-        header {
-            margin-bottom: 80px;
-            text-align: center;
-        }
-
-        .label {
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            font-size: 0.7rem;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 400;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-        }
-
-        .chapter-part {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 60px;
-            display: block;
-        }
-
-        /* Image Styling */
-        .story-image {
-            width: 100%;
-            margin: 60px 0;
-            border-radius: 4px;
+            aspect-ratio: 4/5;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            border: 1px solid var(--card-border);
+            background: #111;
         }
 
-        .story-image.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .story-image img {
+        .art-frame img {
             width: 100%;
-            display: block;
-            filter: grayscale(0.4) contrast(1.1);
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.1);
+            transition: 1s ease;
+            opacity: 0.6;
         }
 
-        .image-caption {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
-            color: var(--dim);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-align: right;
-            margin-top: 15px;
-            display: block;
+        .art-frame:hover img {
+            filter: grayscale(0.5) brightness(1.1);
+            transform: scale(1.05);
+            opacity: 0.9;
         }
 
-        .prose {
-            font-size: 1.15rem;
-            color: var(--text);
-            max-width: 650px;
+        .art-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-style: italic;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* Quotes Grid */
+        .container {
+            padding: 100px 8% 150px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
-        .prose p {
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease-out;
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(35px, 8vw, 60px);
+            margin-bottom: 20px;
+            font-weight: 900;
         }
 
-        .prose p.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .prose em {
-            color: var(--accent);
-            font-family: 'Lora', serif;
-            font-style: italic;
-        }
-
-        /* Divider */
-        .divider {
-            width: 40px;
-            height: 1px;
-            background: var(--accent);
-            margin: 80px auto;
-            opacity: 0.5;
-        }
-
-        footer {
-            margin-top: 100px;
-            text-align: center;
-            padding-bottom: 50px;
-            border-top: 1px solid var(--border);
-            padding-top: 40px;
-        }
-
-        .back-link {
-            font-family: 'Inter', sans-serif;
-            color: var(--dim);
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
+        .section-subtitle {
+            font-size: 12px;
+            letter-spacing: 8px;
             text-transform: uppercase;
-            transition: color 0.3s;
+            color: var(--gold);
+            margin-bottom: 100px;
         }
 
-        #progress {
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .quote-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            padding: 90px 60px;
+            border: 1px solid var(--card-border);
+            position: relative;
+            transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: '“';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 100px;
+            font-family: var(--font-display);
+            color: rgba(255,255,255,0.03);
+            line-height: 1;
+        }
+
+        .quote-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .quote-content {
+            font-family: var(--font-display);
+            font-size: 28px;
+            line-height: 1.3;
+            margin-bottom: 45px;
+            font-weight: 700;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-meta {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .author-tag {
+            font-family: var(--font-header);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: var(--gold);
+        }
+
+        /* Elegant Dividers */
+        .divider {
+            margin: 60px auto;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .mini-btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 10px 24px;
+            font-size: 9px;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 2px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .mini-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 150px 8% 80px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .footer h2 {
+            font-family: var(--font-header);
+            font-size: 28px;
+            letter-spacing: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Toast */
+        #toast {
             position: fixed;
-            top: 0; left: 0;
-            height: 2px;
-            background: var(--accent);
-            z-index: 100;
-            width: 0%;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: #000;
+            padding: 16px 45px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: none;
+            z-index: 5000;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
         }
 
-        @media (max-width: 600px) {
-            .container { padding: 60px 20px; }
-            .prose { font-size: 1.05rem; }
-            .story-image { margin: 40px 0; }
+        @media (max-width: 768px) {
+            .quotes-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 65px; }
+            .quote-content { font-size: 24px; }
+            .container { padding: 60px 8%; }
+            .art-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="divider"></div>
-            
-            <span class="label">Chapter 2</span>
-            <h2 style="font-family: 'Playfair Display', serif; font-weight: 400; font-style: italic; margin-bottom: 40px; text-align: center;">The First Crack</h2>
+<nav class="header-nav">
+    <div class="brand">HASSAN JATOI</div>
+    <div class="nav-actions">
+        <button class="btn btn-outline" onclick="shareDoc()">Share</button>
+        <button class="btn" onclick="downloadPDF()">Export</button>
+    </div>
+</nav>
 
-            <p>The morning arrived quietly</p>
-            <p>not with announcements or expectations</p>
-            <p>but like a sigh that stretches through empty rooms</p>
-            <p>Adrian stood by the window</p>
-            <p>watching the city breathe below him</p>
-            <p>people moving unaware of how fragile hearts could be</p>
-            <p>and inside him, a storm waited silently</p>
+<div id="main-content">
+    <section class="hero">
+        <h1>ONCE UPON<br>A LOVE</h1>
+        <p>A Cinematic Poetry Anthology</p>
+        <div class="divider"></div>
+    </section>
 
-            <div class="story-image">
-                <img src="https://images.unsplash.com/photo-1502622645660-18171694b6b4?q=80&w=1200&auto=format" alt="Broken glass or light fracture">
-                <span class="image-caption">The fragility of ordinary moments</span>
-            </div>
+    <!-- Visual Storytelling Block -->
+    <div class="art-container">
+        <div class="art-frame">
+            <img src="https://i.ibb.co/7FrHjhf/3-OCE-UPON.jpg" alt="[Poetic Image of Landscape]">
+            <div class="art-caption">"Where the silence speaks the loudest..."</div>
+        </div>
+        <div class="art-frame">
+            <img src="https://i.ibb.co/cSK9DTDC/OCE-UPON-12.jpg" alt="[Poetic Image of Rain]">
+            <div class="art-caption">"Written in the rhythm of the rain."</div>
+        </div>
+        <div class="art-frame">
+            <img src="https://i.ibb.co/KjhHwmfb/OCE-UPON.jpg" alt="[Poetic Image of Stars]">
+            <div class="art-caption">"Beneath the weight of borrowed light."</div>
+        </div>
+    </div>
 
-            <p>She had smiled at him yesterday</p>
-            <p>her hand brushing his as if it were an accident</p>
-            <p>her words soft and careless</p>
-            <p>and he had believed in the ordinary</p>
-            <p>believed that love could always remain</p>
-            <p>believed that trust was eternal</p>
+    <div class="container">
+        <h2 class="section-title">The Manuscript</h2>
+        <p class="section-subtitle">A journey through heart and soul</p>
+        
+        <div id="unified-grid" class="quotes-grid">
+            <!-- Content injected by JS -->
+        </div>
+    </div>
 
-            <p>but <em>betrayal</em> begins in the smallest moments</p>
-            <p>in a glance too long or too short</p>
-            <p>in words left unsaid</p>
-            <p>in secrets that breathe in shadows</p>
+    <footer class="footer">
+        <h2>HASSAN JATOI</h2>
+        <p style="font-size: 10px; letter-spacing: 5px; opacity: 0.5;">EPILOGUE &bull; 2025</p>
+        <div style="margin-top: 80px; font-size: 9px; opacity: 0.2; letter-spacing: 3px;">ALL RIGHTS RESERVED &copy; UNTITLED PUBLISHING</div>
+    </footer>
+</div>
 
-            <p>He walked the streets alone</p>
-            <p>trying to find solace in movement</p>
-            <p>in the rhythm of cars and footsteps</p>
-            <p>but the world felt hollow</p>
+<div id="toast">Copied to Clipboard</div>
 
-            <div class="story-image">
-                <img src="https://images.unsplash.com/photo-1470723710355-95304d8aece4?q=80&w=1200&auto=format" alt="Rainy city window">
-                <span class="image-caption">Betrayal arrives disguised as absence</span>
-            </div>
+<script>
+    const combinedData = [
+        "Once upon a broken heart that learned how to smile in silence",
+        "Once upon a broken heart that carried its pain like a quiet prayer",
+        "Once upon a broken heart that still believed in gentle endings",
+        "Once upon a broken heart that loved even after being emptied",
+        "Once upon a broken heart that stitched itself with memories",
+        "Once upon a broken heart that spoke fluently in sighs",
+        "Once upon a broken heart that hid its cracks behind kindness",
+        "Once upon a broken heart that bled poetry instead of tears",
+        "Once upon a broken heart that chose softness over bitterness",
+        "Once upon a broken heart that learned how to breathe again",
+        "Once upon a broken heart that trusted the dark to teach it light",
+        "Once upon a broken heart that remembered how laughter felt",
+        "Once upon a broken heart that aged faster than time",
+        "Once upon a broken heart that survived its own silence",
+        "Once upon a broken heart that made peace with loneliness",
+        "Once upon a broken heart that turned wounds into wisdom",
+        "Once upon a broken heart that spoke only to the moon",
+        "Once upon a broken heart that carried love like a ghost",
+        "Once upon a broken heart that never hated what hurt it",
+        "Once upon a broken heart that learned how to let go slowly",
+        "Once upon a broken heart that lived inside unfinished sentences",
+        "Once upon a broken heart that mistook pain for destiny",
+        "Once upon a broken heart that still hoped quietly",
+        "Once upon a broken heart that memorized goodbyes",
+        "Once upon a broken heart that became a safe place for sorrow",
+        "Once upon a broken heart that feared happiness but wanted it",
+        "Once upon a broken heart that softened with time",
+        "Once upon a broken heart that loved deeply and paid dearly",
+        "Once upon a broken heart that spoke through sleepless nights",
+        "Once upon a broken heart that found beauty in ruins",
+        "Once upon a broken heart that carried echoes of a name",
+        "Once upon a broken heart that learned patience from pain",
+        "Once upon a broken heart that kept forgiving",
+        "Once upon a broken heart that felt everything too much",
+        "Once upon a broken heart that hid behind strength",
+        "Once upon a broken heart that turned ache into art",
+        "Once upon a broken heart that whispered instead of screamed",
+        "Once upon a broken heart that remembered warmth",
+        "Once upon a broken heart that ached quietly at dawn",
+        "Once upon a broken heart that lived on almosts",
+        "Once upon a broken heart that believed love was still real",
+        "Once upon a broken heart that kept its tenderness intact",
+        "Once upon a broken heart that broke open instead of apart",
+        "Once upon a broken heart that learned how to stay gentle",
+        "Once upon a broken heart that trusted time reluctantly",
+        "Once upon a broken heart that carried yesterday inside today",
+        "Once upon a broken heart that refused to harden",
+        "Once upon a broken heart that waited without asking",
+        "Once upon a broken heart that turned scars into stories",
+        "Once upon a broken heart that loved in fragments",
+        "Once upon a broken heart that healed in secret",
+        "Once upon a broken heart that walked through storms quietly",
+        "Once upon a broken heart that found meaning in loss",
+        "Once upon a broken heart that kept loving the world",
+        "Once upon a broken heart that learned silence was language",
+        "Once upon a broken heart that bled softly",
+        "Once upon a broken heart that remembered touch",
+        "Once upon a broken heart that never fully closed",
+        "Once upon a broken heart that chose depth over safety",
+        "Once upon a broken heart that carried tenderness like a burden",
+        "Once upon a broken heart that forgave before forgetting",
+        "Once upon a broken heart that turned grief into grace",
+        "Once upon a broken heart that learned to rest",
+        "Once upon a broken heart that kept its light dim but alive",
+        "Once upon a broken heart that spoke in metaphors",
+        "Once upon a broken heart that lived between hope and ache",
+        "Once upon a broken heart that made sorrow beautiful",
+        "Once upon a broken heart that refused to disappear",
+        "Once upon a broken heart that remembered how to feel",
+        "Once upon a broken heart that learned to be alone",
+        "Once upon a broken heart that still dreamed quietly",
+        "Once upon a broken heart that trusted love again slowly",
+        "Once upon a broken heart that turned pain into patience",
+        "Once upon a broken heart that carried its past gently",
+        "Once upon a broken heart that softened with understanding",
+        "Once upon a broken heart that outlived its breaking",
+        "Once upon a broken heart that chose healing over hate",
+        "Once upon a broken heart that still believed in souls",
+        "Once upon a broken heart that became a lesson",
+        "Once upon a broken heart that learned how to wait",
+        "Once upon a broken heart that whispered hope",
+        "Once upon a broken heart that survived itself",
+        "Once upon a broken heart that found meaning in cracks",
+        "Once upon a broken heart that stayed human",
+        "Once upon a broken heart that learned how to love again",
+        "Once upon a broken heart that became poetry",
+        "Silence is the only language that doesn't lie",
+        "Grief is just love with no place to go",
+        "The stars only shine because the night was brave enough to be dark",
+        "A broken mirror still reflects the sun",
+        "Beauty is found in the cracks of things that survived"
+    ];
 
-            <p>He remembered the first sign</p>
-            <p>a message on her phone</p>
-            <p>innocent in appearance</p>
-            <p>yet carrying a weight he could not name</p>
-            <p>he had chosen to ignore it</p>
-            <p>the mind desperate to protect hope</p>
-            <p>the heart naive enough to trust</p>
-
-            <p>But betrayal does not scream</p>
-            <p>it moves softly</p>
-            <p>it arrives disguised as carelessness</p>
-            <p>as tiny shifts that seem meaningless until everything changes</p>
-
-            <p>And he realized that betrayal is not only in action</p>
-            <p>but in silence</p>
-            <p>in the quiet space where love should have been</p>
-
-            <p>Adrian sat by the window</p>
-            <p>writing in the notebook</p>
-            <p>tracing the first cracks that would shape everything</p>
-            <p>that would change him forever</p>
-            ```
-
-### Isko lagane ke baad kya hoga?
-1.  **Divider:** Purani kahani aur naye chapter ke darmiyan ek khubsurat line ayegi.
-2.  **Fade-in Effect:** Kyunki aapke purane code mein JavaScript pehle se maujud hai, naye paragraphs bhi scroll karne par "fade-in" honge.
-3.  **Visuals:** Maine do aisi images select ki hain jo "khamoshi" aur "shahar ki tanhayi" ko dikhati hain.
-
-**Agla Qadam:** Kya aap chahte hain ke main footer mein **"Next Chapter"** ka button add kar doon jo click karne par smoothly scroll karke naye chapter par le jaye?
-    <
-
-    <script>
-        const observerOptions = { threshold: 0.15 };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.prose p, .story-image').forEach(el => {
-            observer.observe(el);
+    window.onload = function() {
+        const grid = document.getElementById('unified-grid');
+        combinedData.forEach(text => {
+            const card = document.createElement('div');
+            card.className = 'quote-card';
+            card.innerHTML = `
+                <div class="quote-content">${text}</div>
+                <div class="quote-meta">
+                    <span class="author-tag">Hassan Jatoi</span>
+                    <div class="card-btns">
+                        <button class="mini-btn" onclick="shareSingle('${text.replace(/'/g, "\\'")}')">Share</button>
+                        <button class="mini-btn" onclick="copyText('${text.replace(/'/g, "\\'")}')">Copy</button>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
         });
+    }
 
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("progress").style.width = scrolled + "%";
-        });
-    </script>
+    function copyText(text) {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 2000);
+    }
+
+    function shareSingle(text) {
+        const msg = `"${text}" — Hassan Jatoi\n\nRead more: https://hassanaliuk11-oss.github.io/Hassanalipoetry-/`;
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function shareDoc() {
+        const link = "https://hassanaliuk11-oss.github.io/Hassanalipoetry-/";
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(link)}`, '_blank');
+    }
+
+    function downloadPDF() {
+        const element = document.getElementById('main-content');
+        const opt = {
+            margin: 0,
+            filename: 'Hassan_Jatoi_Manuscript.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, backgroundColor: '#050505' },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
+
 </body>
 </html>
