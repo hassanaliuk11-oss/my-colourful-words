@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -580,6 +579,19 @@ body a, body button {
   align-self: flex-start;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
+.msg-bot .chat-answer { white-space: pre-wrap; overflow-wrap: anywhere; }
+.chat-sources {
+  display: grid;
+  gap: 5px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(56, 189, 248, 0.2);
+  font-size: 11px;
+}
+.chat-sources a { color: #7dd3fc; text-decoration: underline; overflow-wrap: anywhere; }
+.chat-error { color: #fecaca; }
+.chat-loading { color: #cbd5e1; }
+.chat-send-button:disabled { cursor: wait; opacity: 0.6; }
 
 .msg-user {
   background: linear-gradient(135deg, #0284c7, #2563eb);
@@ -624,12 +636,174 @@ body a, body button {
 }
 
 @media(max-width:600px){
-  .top-centered-bar { flex-direction: column; width: 100%; }
-  .hire-card-top { width: 100%; max-width: 320px; }
-  .website-art { height: 130px; }
-  .ai-chat-window { bottom: 85px; right: 15px; left: 15px; width: auto; }
+  .top-action-bar {
+    position: relative;
+    padding: 10px 12px;
+  }
+  .top-centered-bar {
+    width: 100%;
+    gap: 8px;
+  }
+  .hire-card-top {
+    flex: 1 1 calc(50% - 8px);
+    width: auto;
+    max-width: none;
+    min-height: 44px;
+    padding: 9px 10px;
+    font-size: 12px;
+    text-align: center;
+  }
+  .hire-cv { flex-basis: 100%; }
+  .cover-photo {
+    height: clamp(220px, 58vw, 340px);
+    min-height: 0;
+    border-bottom-left-radius: 26px;
+    border-bottom-right-radius: 26px;
+  }
+  .cover-photo::before, .cover-photo::after {
+    border-bottom-left-radius: 26px;
+    border-bottom-right-radius: 26px;
+  }
+  .profile-pic-wrapper {
+    width: clamp(132px, 40vw, 170px);
+    margin-top: -76px;
+  }
+  .profile-details { padding: 0 10px; }
+  .colorful-subtitle {
+    max-width: 34rem;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 11px !important;
+    letter-spacing: 0.08em !important;
+  }
+  .section-title {
+    gap: 9px;
+    margin: 3rem 0 1.5rem;
+    font-size: clamp(1.4rem, 6vw, 2rem) !important;
+  }
+  .section-title::before, .section-title::after {
+    width: clamp(12px, 5vw, 30px);
+    flex: 0 0 auto;
+  }
+  .website-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .website-art { height: clamp(130px, 42vw, 190px); }
+  .grid-books {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 16px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .glass-card { padding: 1.5rem 1.25rem; }
+  .grid-social {
+    gap: 12px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .social-card {
+    flex: 1 1 140px;
+    min-width: 0;
+    padding: 1rem;
+  }
+  .modal-box {
+    width: 100%;
+    max-height: min(85vh, 680px);
+    padding: 18px;
+    border-radius: 18px;
+  }
+  .eu-footer { padding: 38px 16px 28px; }
+  .eu-stars {
+    font-size: 18px;
+    letter-spacing: 0.25em;
+  }
+  .ai-chat-window {
+    right: 12px;
+    left: 12px;
+    bottom: 78px;
+    width: auto;
+    height: min(460px, calc(100vh - 275px));
+    border-radius: 20px;
+  }
+  .nav-floating-btn {
+    left: 12px;
+    bottom: 14px;
+    gap: 6px;
+  }
+  .nav-btn {
+    min-height: 44px;
+    padding: 9px 12px;
+    gap: 6px;
+  }
+  .ai-fab-btn {
+    right: 12px;
+    bottom: 12px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 360px) {
+  .eu-top-header { padding-right: 12px; padding-left: 12px; }
+  .eu-top-header .tracking-widest {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+  .section-title { gap: 6px; }
+  .nav-btn { padding-right: 10px; padding-left: 10px; }
+  .msg-bot, .msg-user {
+    max-width: 92%;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 600px) and (max-height: 560px) {
+  .ai-chat-window { height: calc(100vh - 280px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 </style>
+
+<style id="hassan-jatoi-modern-premium-overrides">
+:root{--hj-ink:#071426;--hj-teal:#14b8a6;--hj-blue:#38bdf8}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{font-family:Inter,ui-sans-serif,system-ui,sans-serif;line-height:1.65;text-rendering:optimizeLegibility}
+::selection{background:rgba(20,184,166,.35);color:#fff}
+a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2dd4bf;outline-offset:3px}
+section{scroll-margin-top:90px}
+.card,.portal-item,.service-card,.group{backdrop-filter:blur(10px)}
+@media(min-width:768px){.container,.max-w-7xl,.max-w-6xl{scroll-margin-top:90px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+.hj-official-section{padding:clamp(2.5rem,6vw,5rem) 1rem;background:linear-gradient(135deg,rgba(8,47,73,.45),rgba(6,78,59,.28));border-top:1px solid rgba(125,211,252,.18);border-bottom:1px solid rgba(125,211,252,.18)}
+.hj-official-wrap{max-width:1200px;margin:0 auto}
+.hj-official-eyebrow{color:#5eead4;text-transform:uppercase;letter-spacing:.18em;font-size:.75rem;font-weight:800}
+.hj-official-title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:850;line-height:1.15;color:#f8fafc;margin:.65rem 0}
+.hj-official-intro{color:#cbd5e1;max-width:760px;margin:0 0 1.5rem}
+.hj-official-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1rem}
+.hj-official-card{display:flex;flex-direction:column;gap:.65rem;min-height:190px;padding:1.25rem;border:1px solid rgba(148,163,184,.23);border-radius:1.1rem;background:rgba(15,23,42,.78);text-decoration:none!important;box-shadow:0 8px 28px rgba(0,0,0,.14)}
+.hj-official-card:hover{transform:translateY(-4px);border-color:rgba(45,212,191,.65);box-shadow:0 16px 35px rgba(20,184,166,.12)}
+.hj-official-icon{display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:.8rem;background:rgba(20,184,166,.13);color:#5eead4;font-size:1.15rem}
+.hj-official-card strong{font-size:1.02rem;color:#f8fafc}
+.hj-official-card span{font-size:.9rem;color:#cbd5e1;line-height:1.5}
+.hj-official-cta{margin-top:auto;color:#5eead4;font-size:.8rem;font-weight:800;letter-spacing:.04em}
+</style>
+
 </head>
 <body>
 
@@ -1355,8 +1529,8 @@ body a, body button {
 <div class="ai-chat-window" id="aiChatWindow">
   <div class="chat-header">
     <div class="flex items-center gap-2">
-      <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
-      <span class="font-bold text-sm text-white font-cinzel">Hassan Jatoi AI Assistant</span>
+      <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true"></div>
+      <span class="font-bold text-sm text-white font-cinzel">Hassan Jatoi Live AI Assistant</span>
     </div>
     <button onclick="toggleAiChat()" class="text-slate-400 hover:text-white text-xl">&times;</button>
   </div>
@@ -1374,8 +1548,8 @@ body a, body button {
   </div>
 
   <div class="p-3 bg-slate-900 border-t border-slate-800 flex gap-2">
-    <input type="text" id="chatInput" placeholder="Type your query..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-400" onkeypress="handleChatKeyPress(event)">
-    <button onclick="sendChatMessage()" class="bg-gradient-to-r from-sky-500 to-blue-600 text-white px-3 py-2 rounded-xl text-xs font-bold hover:opacity-90">
+    <input type="text" id="chatInput" maxlength="2000" aria-label="Ask the AI assistant a question" placeholder="Ask a question..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-400" onkeypress="handleChatKeyPress(event)">
+    <button id="chatSendButton" type="button" aria-label="Send message" onclick="sendChatMessage()" class="chat-send-button bg-gradient-to-r from-sky-500 to-blue-600 text-white px-3 py-2 rounded-xl text-xs font-bold hover:opacity-90">
       <i class="fa-solid fa-paper-plane"></i>
     </button>
   </div>
@@ -1688,6 +1862,9 @@ body a, body button {
   }
 
   /* Chatbot Logic */
+  let chatHistory = [];
+  let chatRequestPending = false;
+
   function toggleAiChat() {
     const win = document.getElementById('aiChatWindow');
     win.classList.toggle('active');
@@ -1699,59 +1876,129 @@ body a, body button {
   }
 
   function handleChatKeyPress(e) {
-    if(e.key === 'Enter') sendChatMessage();
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
+      e.preventDefault();
+      sendChatMessage();
+    }
   }
 
-  function sendChatMessage() {
+  function appendAssistantMessage(answer, sources) {
+    const botDiv = document.createElement('div');
+    botDiv.className = 'msg-bot';
+
+    const answerDiv = document.createElement('div');
+    answerDiv.className = 'chat-answer';
+    answerDiv.textContent = answer;
+    botDiv.appendChild(answerDiv);
+
+    if (sources.length) {
+      const sourceList = document.createElement('div');
+      sourceList.className = 'chat-sources';
+
+      const label = document.createElement('strong');
+      label.textContent = 'Sources';
+      sourceList.appendChild(label);
+
+      for (const source of sources) {
+        if (!source || typeof source.url !== 'string') continue;
+
+        let url;
+        try {
+          url = new URL(source.url);
+        } catch {
+          continue;
+        }
+        if (url.protocol !== 'https:') continue;
+
+        const link = document.createElement('a');
+        link.href = url.href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = typeof source.title === 'string' && source.title.trim()
+          ? source.title
+          : url.hostname;
+        sourceList.appendChild(link);
+      }
+
+      if (sourceList.childElementCount > 1) {
+        botDiv.appendChild(sourceList);
+      }
+    }
+
+    document.getElementById('chatMessages').appendChild(botDiv);
+    return botDiv;
+  }
+
+  async function sendChatMessage() {
     const input = document.getElementById('chatInput');
     const msg = input.value.trim();
-    if(!msg) return;
+    const sendButton = document.getElementById('chatSendButton');
+    if (!msg || chatRequestPending) return;
 
     const chatMessages = document.getElementById('chatMessages');
-    
-    // User message
     const userDiv = document.createElement('div');
     userDiv.className = 'msg-user';
     userDiv.textContent = msg;
     chatMessages.appendChild(userDiv);
 
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'msg-bot chat-loading';
+    loadingDiv.setAttribute('role', 'status');
+    loadingDiv.textContent = 'Searching current sources and preparing an answer...';
+    chatMessages.appendChild(loadingDiv);
+
+    chatRequestPending = true;
     input.value = '';
+    input.disabled = true;
+    sendButton.disabled = true;
+    sendButton.setAttribute('aria-label', 'Sending message');
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // AI Response logic
-    setTimeout(() => {
-      const botDiv = document.createElement('div');
-      botDiv.className = 'msg-bot';
-      botDiv.innerHTML = getAiResponse(msg);
-      chatMessages.appendChild(botDiv);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 600);
-  }
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg, history: chatHistory.slice(-6) })
+      });
+      let data;
 
-  function getAiResponse(query) {
-    const q = query.toLowerCase();
-    if (q.includes('scam') || q.includes('fraud') || q.includes('fake job') || q.includes('agent')) {
-      return "Never rely on a guaranteed-visa promise or pay an unverified recruiter. Verify the employer and application directly with government sources. Open the <a href='#scam-protection-grid' class='underline text-sky-400 font-bold'>Scam Protection links</a> and check the destination country's official immigration portal.";
-    } else if (q.includes('scholarship') || q.includes('erasmus') || q.includes('daad') || q.includes('study abroad') || q.includes('admission')) {
-      return "Scholarships have different eligibility rules and annual deadlines. Use the <a href='#scholarship-grid' class='underline text-sky-400 font-bold'>Scholarships & Admissions directory</a>, then confirm the current deadline and requirements on each official programme site.";
-    } else if (q.includes('qualification') || q.includes('degree') || q.includes('document') || q.includes('attestation') || q.includes('enic') || q.includes('hec')) {
-      return "Qualification recognition depends on the country and profession. Start with <a href='#qualification-grid' class='underline text-sky-400 font-bold'>Document & Qualification links</a> and confirm the process with the relevant authority before paying for verification.";
-    } else if (q.includes('canada') || q.includes('australia') || q.includes('new zealand') || q.includes('japan') || q.includes('korea') || q.includes('singapore') || q.includes('immigration')) {
-      return "Visa eligibility depends on your nationality, purpose and personal circumstances. Search the <a href='#visa-country-grid' class='underline text-sky-400 font-bold'>official immigration directory</a> and use government portals only; I can't determine eligibility or guarantee an outcome.";
-    } else if (q.includes('travel') || q.includes('ees') || q.includes('etias')) {
-      return "For current Entry/Exit System and ETIAS status, use the <a href='#travel-system-grid' class='underline text-sky-400 font-bold'>official EU travel-system links</a>. ETIAS is not a visa substitute when a visa is required.";
-    } else if (q.includes('job') || q.includes('career') || q.includes('work')) {
-      return "Browse the <a href='#europe-job-grid' class='underline text-sky-400 font-bold'>official job portals</a>. Check that each vacancy accepts international applicants and never pay an unverified recruiter for a guaranteed job.";
-    } else if (q.includes('hassan') || q.includes('who is')) {
-      return "Hassan Jatoi is a poet, author, CV/Resume expert, and digital consultant. You can use the CV order form on this page or contact him directly through WhatsApp.";
-    } else if (q.includes('cv') || q.includes('europass') || q.includes('resume') || q.includes('hire')) {
-      return "Use the Europass link in the <a href='#qualification-grid' class='underline text-sky-400 font-bold'>document directory</a>, or request CV services from Hassan using the order form. For direct contact, use <a href='https://wa.me/923083500829' target='_blank' rel='noopener noreferrer' class='underline text-emerald-400 font-bold'>WhatsApp</a>.";
-    } else if (q.includes('visa') || q.includes('embassy') || q.includes('europe')) {
-      return "Search by country in the <a href='#visa-directory' class='underline text-sky-400 font-bold'>visa and embassy directory</a>. Choose Work, Visit, Student or Family to filter visa links. Always confirm requirements with the official embassy or immigration authority.";
-    } else if (q.includes('poetry') || q.includes('book') || q.includes('tears') || q.includes('lonely')) {
-      return "Hassan Jatoi's poetry books include 'Tears In Eyes (Silent People)', 'Death of Spirits', and 'Lonely Path'. Scroll to the Poetry Collection section to preview them.";
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error('The AI assistant returned an invalid response. Please try again later.');
+      }
+
+      if (!response.ok) {
+        throw new Error(typeof data.error === 'string' ? data.error : 'The AI assistant could not answer. Please try again.');
+      }
+      if (typeof data.answer !== 'string' || !data.answer.trim()) {
+        throw new Error('The AI assistant returned an empty answer. Please try again.');
+      }
+
+      chatHistory = chatHistory.concat(
+        { role: 'user', text: msg },
+        { role: 'model', text: data.answer }
+      ).slice(-6);
+
+      loadingDiv.remove();
+      appendAssistantMessage(data.answer, Array.isArray(data.sources) ? data.sources : []);
+    } catch (error) {
+      loadingDiv.remove();
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'msg-bot chat-error';
+      errorDiv.setAttribute('role', 'alert');
+      errorDiv.textContent = error instanceof TypeError
+        ? 'Could not connect to the live assistant. Please check your connection and try again.'
+        : error.message;
+      chatMessages.appendChild(errorDiv);
+    } finally {
+      chatRequestPending = false;
+      input.disabled = false;
+      sendButton.disabled = false;
+      sendButton.setAttribute('aria-label', 'Send message');
+      input.focus();
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-    return "I can help you find official job, visa, scholarship, document-recognition and scam-safety resources. Tell me a country and what you need, such as 'Canada work visa' or 'Germany scholarship'. I provide directory guidance, not legal advice or eligibility decisions.";
   }
 
   /* Interactive Background Canvas Particles */
@@ -1882,5 +2129,22 @@ body a, body button {
     setTimeout(reveal, 100);
   };
 </script>
+
+<section class="hj-official-section" id="official-jobs-immigration" aria-labelledby="hj-official-heading">
+  <div class="hj-official-wrap">
+    <div class="hj-official-eyebrow">Verified starting points</div>
+    <h2 class="hj-official-title" id="hj-official-heading">Official Jobs & Immigration Portals</h2>
+    <p class="hj-official-intro">Use these government and official portals to explore vacancies, work opportunities, and immigration information. Eligibility and application rules vary by country; always confirm requirements on the official website before applying.</p>
+    <div class="hj-official-grid">
+      <a class="hj-official-card" href="https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal_en" target="_blank" rel="noopener noreferrer"><span class="hj-official-icon" aria-hidden="true">🇪🇺</span><strong>EU Immigration Portal</strong><span>Official European Union information about immigration and living or working in EU countries.</span><span class="hj-official-cta">Visit official portal ↗</span></a>
+      <a class="hj-official-card" href="https://eures.europa.eu/" target="_blank" rel="noopener noreferrer"><span class="hj-official-icon" aria-hidden="true">💼</span><strong>EURES — European Jobs</strong><span>Explore European job vacancies and employment mobility information.</span><span class="hj-official-cta">Search opportunities ↗</span></a>
+      <a class="hj-official-card" href="https://commission.europa.eu/about/careers/jobs_en" target="_blank" rel="noopener noreferrer"><span class="hj-official-icon" aria-hidden="true">🏛️</span><strong>European Commission Careers</strong><span>Official career and job information from the European Commission.</span><span class="hj-official-cta">View careers ↗</span></a>
+      <a class="hj-official-card" href="https://www.jobbank.gc.ca/findajob/foreign-candidates" target="_blank" rel="noopener noreferrer"><span class="hj-official-icon" aria-hidden="true">🇨🇦</span><strong>Canada Job Bank</strong><span>Job-search guidance and vacancies for candidates applying from outside Canada.</span><span class="hj-official-cta">Find Canadian jobs ↗</span></a>
+      <a class="hj-official-card" href="https://www.canada.ca/en/services/jobs.html" target="_blank" rel="noopener noreferrer"><span class="hj-official-icon" aria-hidden="true">🍁</span><strong>Government of Canada — Jobs</strong><span>Government information and services related to finding work in Canada.</span><span class="hj-official-cta">Explore jobs ↗</span></a>
+      <a class="hj-official-card" href="https://www.workforceaustralia.gov.au/individuals/jobs/" target="_blank" rel="noopener noreferrer"><span class="hj-official-icon" aria-hidden="true">🇦🇺</span><strong>Workforce Australia</strong><span>Official Australian employment service and job-search resources.</span><span class="hj-official-cta">Search Australian jobs ↗</span></a>
+    </div>
+  </div>
+</section>
+
 </body>
 </html>
